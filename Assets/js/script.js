@@ -3,15 +3,16 @@ var choices = Array.from(document.querySelectorAll(".choice-text"));
 var progressText = document.querySelector("#progressText");
 var scoreText = document.querySelector("#score");
 var progressBarFull = document.querySelector("progressBarFull");
+var timerEl = document.querySelector("#currentTime")
 
-let score = 0;
+var score = 0;
 
-let time = 60;
+var timeLeft = 60;
 
-let currentQuestion = {};
-let acceptedAnswer = true;
-let questionCounter = 0;
-let availableQuestions = [];
+var currentQuestion = {};
+var acceptedAnswer = true;
+var questionCounter = 0;
+var availableQuestions = [];
 
 var questions = [
   {
@@ -50,17 +51,17 @@ var questions = [
   },
 ];
 
-var score_points = 100;
+var score_points = 25;
 var maxQuestions = 4;
 
-startGame = () => {
+function startGame(){
     questionCounter = 0;
     score = 0;
     availableQuestions = [...questions];
     getNewQuestion();
 }
 
-getNewQuestion = () => {
+function getNewQuestion(){
     if(availableQuestions.length === 0 || questionCounter > maxQuestions) {
         localStorage.setItem("mostRecentScore", score);
 
@@ -92,25 +93,45 @@ choices.forEach(choice => {
     if(!acceptedAnswer) return;
 
     acceptedAnswer = false;
-    var selectedChoice = event.target
+    var selectedChoice = event.target;
     var selectedAnswer = selectedChoice.dataset["number"];
 
-    var classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
-
-    if (classToApply === "correct") {
-      incrementScore(score_points);
+    function checkAnswer() {
+      if (selectedAnswer == questions[currentQuestion].answer){
+        incrementScore(score_points);
+        answerIsCorrect();
+      }
+      else{
+        answerIsWrong();
+      }
     }
 
-    selectedChoice.parentElement.classList.add(classToApply);
+    function answerIsCorrect() {
+      selectedChoice.parentElement.classList.add("correct");
+    }
 
+    function answerIsWrong() {
+      selectedChoice.parentElement.classList.add("incorrect");
+    }
+
+    // var classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+   
+    // if(classToApply === "correct") {
+    //   incrementScore(score_points);
+    // }
+
+    // turns button green or red depending on answer
+    // selectedChoice.parentElement.classList.add(classToApply);
+
+    // turns off the red or green button after one second
     setTimeout(() => {
-      selectedChoice.parentElement.classList.remove(classToApply);
+      // selectedChoice.parentElement.classList.remove(classToApply);
       getNewQuestion();
     }, 1000)
   })
 })
 
-incrementScore = num => {
+function incrementScore(num){
   score +=num;
   scoreText.innerText = score;
 }
