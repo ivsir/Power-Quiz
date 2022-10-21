@@ -1,5 +1,5 @@
 body {
-  color: #fff;
+  color: rgb(238, 230, 230);
 }
 
 .choice-container {
@@ -7,7 +7,7 @@ body {
     margin-bottom: 0.8rem;
     width: 100%;
     border-radius: 4px;
-    background: rgb(18,93,255);
+    background: rgb(56, 17, 230);
     font-size: 3rem;
     min-width: 80rem;
 }
