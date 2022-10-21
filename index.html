@@ -5,23 +5,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
+
   <body>
     <div class = "container">
-      <div id="question-container" class = "hide">
-        <div id="question">Question</div>
-        <div id="answer-buttons" class="btn-grid">
-          <button class="btn">Answer 1</button>
-          <button class="btn">Answer 2</button>
-          <button class="btn">Answer 3</button>
-          <button class="btn">Answer 4</button>
-        </div>
-      </div>
-      <div class = "controls">
-        <button id="start-btn" class="start-btn btn">Start</button> 
-        <button id="next-btn" class="next-btn btn hide">Next</button> 
+      <div id="home" class="flex-column flex-center">
+        <h1>Power Quiz</h1>
+        <h2>Based On Robert Greene's "Power"</h2>
+        <a href="/game.html" id="start-btn" class="start-btn btn">Start</a>
+        <a href="/highscores.html" id="highscore-btn" class="highscore-btn btn">High Scores</a>
       </div>
     </div>
-    <script defer src="assets/js/script.js"></script>
   </body>
+  <!-- <body>
+    <div class="header-container">
+      <div id="highscore-btn" class="header-content">View Highscores</div>
+      <div class="controls">
+        <button id="start-btn" class="start-btn btn">Start</button>
+        <button id="next-btn" class="next-btn btn hide">Next</button>
+      </div>
+      <div id="timer">
+        <div id="time" class="header-content">Time:</div>
+        <div class="large-font timer-count">60</div>
+      </div>
+    </div>
+    <div class="container">
+      <div id="question-container" class="hide">
+        <div id="question">Question</div>
+        <div id="answer-buttons" class="btn-grid">
+          <button class="btn">
+            <p class="choice-text" data-number="1">A. Answer 1</p>
+          </button>
+          <button class="btn">
+            <p class="choice-text" data-number="2">B. Answer 2</p>
+          </button>
+          <button class="btn">
+            <p class="choice-text" data-number="3">C. Answer 3</p>
+          </button>
+          <button class="btn">
+            <p class="choice-text" data-number="3">D. Answer 4</p>
+          </button>
+        </div>
+      </div>
+    </div> -->
+    <script defer src="assets/js/script.js"></script>
+  <!-- </body> -->
 </html>
