@@ -3,13 +3,16 @@ var choices = Array.from(document.querySelectorAll(".choice-text"));
 var progressText = document.querySelector("#progressText");
 var scoreText = document.querySelector("#score");
 var progressBarFull = document.querySelector("progressBarFull");
-var timerEl = document.querySelector("#currentTime")
+var timerEl = document.querySelector("#current-time");
+// var startButton = document.querySelector("start-btn");
+var timer;
+var quizEnd = true;
 
 var score = 0;
 
-var timeLeft = 60;
+var timerCount = 60;
 
-var currentQuestion = {};
+var currentQuestion =  {};
 var acceptedAnswer = true;
 var questionCounter = 0;
 var availableQuestions = [];
@@ -50,6 +53,50 @@ var questions = [
     answer: 3,
   },
 ];
+// var questions = [
+//   {
+//     question: "What is the first law of power?",
+//     answer: "Never outshine the master.",
+//     answers:[
+//     {choice: "Never outshine the master."},
+//     {choice: "Concentrate your forces."},
+//     {choice: "Play to people's fantasies"},
+//     {choice: "Avoid the unhappy and unlucky"},
+//   ]
+//   },
+//   {
+//     question: "What is the 25th law of power?",
+//     answer: "Re-create yourself",
+//     answers:[
+//     {choice: "Never put too much trust in friends, learn how to use enemies."},
+//     {choice: "Concentrate your forces."},
+//     {choice: "Re-create yourself"},
+//     {choice: "Avoid the unhappy and unlucky"},
+//     ]
+//   },
+//   {
+//     question:
+//       "Which law is this referring to? : He lives well who conceals himself well.",
+//     answer: "Think as you like but behave like others",
+//     answers:[
+//     {choice: "Never put too much trust in friends, learn how to use enemies."},
+//     {choice: "Avoid the unhappy and unlucky"},
+//     {choice: "Re-create yourself"},
+//     {choice: "Think as you like but behave like others"},
+//     ]
+//   },
+//   {
+//     question:
+//       "Which law is this referring to? : Do not commit to anyone.",
+//     answer: "Law 20",
+//     answers:[
+//     {choice: "Law 4"},
+//     {choice: "Law 6"},
+//     {choice: "Law 20"},
+//     {choice: "Law 24"},
+//     ]
+//   },
+// ];
 
 var score_points = 25;
 var maxQuestions = 4;
@@ -58,13 +105,28 @@ function startGame(){
     questionCounter = 0;
     score = 0;
     availableQuestions = [...questions];
+    quizEnd= false;
     getNewQuestion();
+    startTimer();
+}
+
+function startTimer() {
+  // Sets timer
+  timer = setInterval(function() {
+    timerCount--;
+    timerEl.innerText= timerCount;
+    // Tests if time has run out
+    if (timerCount === 0) {
+      // Clears interval
+      clearInterval(timer);
+    }
+  }, 1000);
 }
 
 function getNewQuestion(){
     if(availableQuestions.length === 0 || questionCounter > maxQuestions) {
         localStorage.setItem("mostRecentScore", score);
-
+        quizEnd = true;
         return window.location.assign("/end.html");
     }
 
@@ -95,37 +157,19 @@ choices.forEach(choice => {
     acceptedAnswer = false;
     var selectedChoice = event.target;
     var selectedAnswer = selectedChoice.dataset["number"];
+    
+    var classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
 
-    function checkAnswer() {
-      if (selectedAnswer == questions[currentQuestion].answer){
-        incrementScore(score_points);
-        answerIsCorrect();
-      }
-      else{
-        answerIsWrong();
-      }
+    if(classToApply === "correct") {
+      incrementScore(score_points);
     }
-
-    function answerIsCorrect() {
-      selectedChoice.parentElement.classList.add("correct");
-    }
-
-    function answerIsWrong() {
-      selectedChoice.parentElement.classList.add("incorrect");
-    }
-
-    // var classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
-   
-    // if(classToApply === "correct") {
-    //   incrementScore(score_points);
-    // }
 
     // turns button green or red depending on answer
-    // selectedChoice.parentElement.classList.add(classToApply);
+    selectedChoice.parentElement.classList.add(classToApply);
 
     // turns off the red or green button after one second
     setTimeout(() => {
-      // selectedChoice.parentElement.classList.remove(classToApply);
+      selectedChoice.parentElement.classList.remove(classToApply);
       getNewQuestion();
     }, 1000)
   })
