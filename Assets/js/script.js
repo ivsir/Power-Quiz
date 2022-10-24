@@ -5,7 +5,6 @@ var scoreText = document.querySelector("#score");
 var progressBarFull = document.querySelector("progressBarFull");
 var timerEl = document.querySelector("#current-time");
 var choiceResult = document.querySelector("#choice-result")
-// var startButton = document.querySelector("start-btn");
 var timer;
 var quizEnd = true;
 
