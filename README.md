@@ -13,7 +13,7 @@ I was assigned a project in which I had to create a quiz using javascript, Web A
 </nav>
 
 ## How to Use this Project
-<a href="https://ivsir.github.io/Professional-Portfolio/">This is the link to my WebPage</a>
+<a href="https://ivsir.github.io/Power-Quiz/">This is the link to my WebPage</a>
 <img src="Assets/Start-Page.png">
 <img src="Assets/Example-1.png">
 <img src="Assets/Example-2.png">
@@ -21,4 +21,4 @@ I was assigned a project in which I had to create a quiz using javascript, Web A
 <img src="Assets/Leaderboard-Page.png">
 
 ## Contributors
-Risvi Tareq
+Risvi Tareqs
