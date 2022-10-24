@@ -11,7 +11,7 @@ var quizEnd = true;
 
 var score = 0;
 
-var timerCount = 5;
+var timerCount = 30;
 
 var currentQuestion =  {};
 var acceptedAnswer = true;
@@ -75,13 +75,14 @@ function startTimer() {
     timerCount--;
     timerEl.innerText= timerCount;
     // Tests if time has run out
-    if (timerCount === 0) {
+    if (timerCount <= 0) {
       // Clears interval
+      localStorage.setItem("mostRecentScore", score);
       clearInterval(timer);
-      quizEnd = true;
+      
       choiceResult.innerText = "TIME'S UP!";
-
       setTimeout(() => {
+        quizEnd = true;
         return window.location.assign("/end.html");
       }, 1000)
     }
@@ -159,8 +160,6 @@ choices.forEach(choice => {
 function incrementScore(num){
   score +=num;
   scoreText.innerText = score;
-
-  
 }
 
 function decrementTime(time){
