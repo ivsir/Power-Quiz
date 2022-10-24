@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Highscores</title>
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/highscores.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,18 +17,12 @@
 </head>
 <body>
     <div class="container">
-        <div id="end" class="flex-center flex-column">
-            <h1 id="finalScore">
-                <form class="end-form-container">
-                    <h2 id="end-text">Enter your initials below to save your score.</h2>
-                    <input type="text" name="name" id="username" placeholder="Enter your initials">
-                    <button class="btn" id="saveScoreBtn" type="submit" onclick="saveHighScore(event)" disabled>Save</button>
-                    <a href="game.html" class="btn">Play Again</a>
-                    <a href="index.html" class="btn">Go Home</a>
-                </form>
-            </h1>
+        <div id="highScores" class="flex-center flex-column">
+            <h1 id="finalScore">Leaderboard</h1>
+            <ul id="highScoresList"></ul>
+            <a href="/" class="btn">Go Home</a>
         </div>
     </div>
-    <script src="Assets/js/end.js"></script>
+    <script src="Assets/js/highscores.js"></script>
 </body>
 </html>

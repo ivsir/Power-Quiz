@@ -16,6 +16,7 @@ var currentQuestion =  {};
 var acceptedAnswer = true;
 var questionCounter = 0;
 var availableQuestions = [];
+var currentIndex = 0;
 
 var questions = [
   {
@@ -24,7 +25,7 @@ var questions = [
     choice2: "Concentrate your forces.",
     choice3: "Play to people's fantasies",
     choice4: "Avoid the unhappy and unlucky",
-    answer: 1,
+    answer: "1",
   },
   {
     question: "What is the 25th law of power?",
@@ -32,7 +33,7 @@ var questions = [
     choice2: "Concentrate your forces.",
     choice3: "Re-create yourself",
     choice4: "Avoid the unhappy and unlucky",
-    answer: 3,
+    answer: "3",
   },
   {
     question:
@@ -41,7 +42,7 @@ var questions = [
     choice2: "Avoid the unhappy and unlucky",
     choice3: "Re-create yourself",
     choice4: "Think as you like but behave like others",
-    answer: 4,
+    answer: "4",
   },
   {
     question:
@@ -50,56 +51,13 @@ var questions = [
     choice2: "Law 6",
     choice3: "Law 20",
     choice4: "Law 24",
-    answer: 3,
+    answer: "3",
   },
 ];
-// var questions = [
-//   {
-//     question: "What is the first law of power?",
-//     answer: "Never outshine the master.",
-//     answers:[
-//     {choice: "Never outshine the master."},
-//     {choice: "Concentrate your forces."},
-//     {choice: "Play to people's fantasies"},
-//     {choice: "Avoid the unhappy and unlucky"},
-//   ]
-//   },
-//   {
-//     question: "What is the 25th law of power?",
-//     answer: "Re-create yourself",
-//     answers:[
-//     {choice: "Never put too much trust in friends, learn how to use enemies."},
-//     {choice: "Concentrate your forces."},
-//     {choice: "Re-create yourself"},
-//     {choice: "Avoid the unhappy and unlucky"},
-//     ]
-//   },
-//   {
-//     question:
-//       "Which law is this referring to? : He lives well who conceals himself well.",
-//     answer: "Think as you like but behave like others",
-//     answers:[
-//     {choice: "Never put too much trust in friends, learn how to use enemies."},
-//     {choice: "Avoid the unhappy and unlucky"},
-//     {choice: "Re-create yourself"},
-//     {choice: "Think as you like but behave like others"},
-//     ]
-//   },
-//   {
-//     question:
-//       "Which law is this referring to? : Do not commit to anyone.",
-//     answer: "Law 20",
-//     answers:[
-//     {choice: "Law 4"},
-//     {choice: "Law 6"},
-//     {choice: "Law 20"},
-//     {choice: "Law 24"},
-//     ]
-//   },
-// ];
 
 var score_points = 25;
 var maxQuestions = 4;
+var penalty_time = 5;
 
 function startGame(){
     questionCounter = 0;
@@ -119,7 +77,10 @@ function startTimer() {
     if (timerCount === 0) {
       // Clears interval
       clearInterval(timer);
+      quizEnd = true;
     }
+
+
   }, 1000);
 }
 
@@ -137,11 +98,13 @@ function getNewQuestion(){
     var questionIndex = Math.floor(Math.random() * availableQuestions.length);
     var currentQuestion = availableQuestions[questionIndex];
     question.innerText = currentQuestion.question;
+    currentIndex = questionIndex
 
     // assigns each choice in a box corresponding to its number
     choices.forEach(choice => {
         var number = choice.dataset["number"];
         choice.innerText = currentQuestion["choice" + number];
+        choice.setAttribute('data-answer',availableQuestions[questionIndex].answer);
     })
 
     // removes the question from the available questions array
@@ -158,17 +121,24 @@ choices.forEach(choice => {
     var selectedChoice = event.target;
     var selectedAnswer = selectedChoice.dataset["number"];
     
-    var classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+    var classToApply = selectedAnswer == this.getAttribute('data-answer') ? "correct" : "incorrect";
 
     if(classToApply === "correct") {
       incrementScore(score_points);
+      alert("Correct");
+    }
+
+    if(classToApply === "incorrect") {
+      decrementTime(penalty_time);
+      alert('incorrect');
     }
 
     // turns button green or red depending on answer
+    
     selectedChoice.parentElement.classList.add(classToApply);
-
     // turns off the red or green button after one second
     setTimeout(() => {
+   
       selectedChoice.parentElement.classList.remove(classToApply);
       getNewQuestion();
     }, 1000)
@@ -178,6 +148,11 @@ choices.forEach(choice => {
 function incrementScore(num){
   score +=num;
   scoreText.innerText = score;
+}
+
+function decrementTime(time){
+  timerCount -=time;
+  timerCount.innerText = timerCount;
 }
 
 startGame();
