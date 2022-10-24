@@ -77,6 +77,7 @@ function startTimer() {
     // Tests if time has run out
     if (timerCount <= 0) {
       // Clears interval
+      timerEl.innerText= 0;
       localStorage.setItem("mostRecentScore", score);
       clearInterval(timer);
       
@@ -86,8 +87,6 @@ function startTimer() {
         return window.location.assign("/end.html");
       }, 1000)
     }
-
-
   }, 1000);
 }
 
@@ -153,6 +152,7 @@ choices.forEach(choice => {
     setTimeout(() => {
       selectedChoice.parentElement.classList.remove(classToApply);
       getNewQuestion();
+      choiceResult.innerText = " ";
     }, 1000)
   })
 })
