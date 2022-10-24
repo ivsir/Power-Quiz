@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../UCSD-VIRT-FSF-PT-09-2022-U-LOLC/04-Web-APIs/01-Activities/28-Stu_Mini-Project"
+		},
+		{
+			"path": "../../../Professional-Portfolio"
+		},
+		{
+			"path": "../../../UCSD-VIRT-FSF-PT-09-2022-U-LOLC/04-Web-APIs"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Power-Quiz"
+	}
+}
