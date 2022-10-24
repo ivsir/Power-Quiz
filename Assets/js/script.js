@@ -4,13 +4,14 @@ var progressText = document.querySelector("#progressText");
 var scoreText = document.querySelector("#score");
 var progressBarFull = document.querySelector("progressBarFull");
 var timerEl = document.querySelector("#current-time");
+var choiceResult = document.querySelector("#choice-result")
 // var startButton = document.querySelector("start-btn");
 var timer;
 var quizEnd = true;
 
 var score = 0;
 
-var timerCount = 60;
+var timerCount = 5;
 
 var currentQuestion =  {};
 var acceptedAnswer = true;
@@ -78,6 +79,11 @@ function startTimer() {
       // Clears interval
       clearInterval(timer);
       quizEnd = true;
+      choiceResult.innerText = "TIME'S UP!";
+
+      setTimeout(() => {
+        return window.location.assign("/end.html");
+      }, 1000)
     }
 
 
@@ -85,9 +91,9 @@ function startTimer() {
 }
 
 function getNewQuestion(){
+
     if(availableQuestions.length === 0 || questionCounter > maxQuestions) {
         localStorage.setItem("mostRecentScore", score);
-        quizEnd = true;
         return window.location.assign("/end.html");
     }
 
@@ -122,15 +128,21 @@ choices.forEach(choice => {
     var selectedAnswer = selectedChoice.dataset["number"];
     
     var classToApply = selectedAnswer == this.getAttribute('data-answer') ? "correct" : "incorrect";
+    
+    
 
     if(classToApply === "correct") {
       incrementScore(score_points);
-      alert("Correct");
+      choiceResult.innerText = "RIGHT ANSWER";
+
+      // alert("Correct");
+
     }
 
     if(classToApply === "incorrect") {
       decrementTime(penalty_time);
-      alert('incorrect');
+      choiceResult.innerText = "WRONG ANSWER";
+      // alert('incorrect');
     }
 
     // turns button green or red depending on answer
@@ -138,7 +150,6 @@ choices.forEach(choice => {
     selectedChoice.parentElement.classList.add(classToApply);
     // turns off the red or green button after one second
     setTimeout(() => {
-   
       selectedChoice.parentElement.classList.remove(classToApply);
       getNewQuestion();
     }, 1000)
@@ -148,11 +159,14 @@ choices.forEach(choice => {
 function incrementScore(num){
   score +=num;
   scoreText.innerText = score;
+
+  
 }
 
 function decrementTime(time){
   timerCount -=time;
   timerCount.innerText = timerCount;
+
 }
 
 startGame();

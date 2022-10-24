@@ -29,6 +29,11 @@ body {
     width: 100%
 }
 
+#choice-result {
+    color:white;
+    font-size: 4rem;
+    text-align: center;
+}
 .correct {
     background: linear-gradient(32deg, rgba(11,223,36) 0%, rgb(41,232,111)100%);
 }
