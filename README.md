@@ -14,11 +14,11 @@ I was assigned a project in which I had to create a quiz using javascript, Web A
 
 ## How to Use this Project
 <a href="https://ivsir.github.io/Power-Quiz/">This is the link to my WebPage</a>
-<img src="Assets/Start-Page.png">
-<img src="Assets/Example-1.png">
-<img src="Assets/Example-2.png">
-<img src="Assets/Save-Score-Page.png">
-<img src="Assets/Leaderboard-Page.png">
+<img src="assets/Start-Page.png">
+<img src="assets/Example-1.png">
+<img src="assets/Example-2.png">
+<img src="assets/Save-Score-Page.png">
+<img src="assets/Leaderboard-Page.png">
 
 ## Contributors
 Risvi Tareqs
