@@ -83,7 +83,7 @@ function startTimer() {
       choiceResult.innerText = "TIME'S UP!";
       setTimeout(() => {
         quizEnd = true;
-        return window.location.href="./end.html";
+        return window.location.href = "./end.html";
       }, 1000)
     }
   }, 1000);
@@ -93,7 +93,7 @@ function getNewQuestion(){
 
     if(availableQuestions.length === 0 || questionCounter > maxQuestions) {
         localStorage.setItem("mostRecentScore", score);
-        return window.location.href="./end.html";
+        return window.location.href = "./end.html";
     }
 
     questionCounter++;
